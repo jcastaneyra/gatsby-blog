@@ -1,23 +1,17 @@
 ---
 title: "About"
-date: "2018-07-19"
-author: "Radek"
+date: "2020-07-12"
+author: "jcastaneyra"
 path: "/about"
 ---
 
-## Hi there
+![me](../images/me.jpg)
 
-My name is Radek and I'm the author of this starter. I made it to help you present your ideas easier.
+## Hello!
 
-We all know how hard is to start something on the web, especially these days. You need to prepare a bunch of stuff, configure them and when that’s done — create the content.
+My name is Jose Castaneyra, and I'm a Software Engineer (previously for a couple of years a Cloud Engineer).
 
-This starter is pretty basic and covers all of the essentials. All you have to do is start typing!
+Long time ago I had also a blog, but this wasn't updated for about eight years, I am trying to start again, definitely
+this site will have technical content about what I am doing and some references about me and my career, I said in my old blog that was a repo of ideas, this will be something similar but skipping the personal stuff.
 
-The starter includes:
-
-- **light/dark mode**, depending on your preferences
-- great reading experience thanks to [**Inter UI font**](https://rsms.me/inter/), made by [Rasmus Andersson](https://rsms.me/about/)
-- nice code highlighting thanks to [**PrismJS**](https://prismjs.com)
-- responsive youtube/vimeo etc. videos thanks to [**gatsby-remark-embed-video**](https://github.com/borgfriend/gatsby-remark-embed-video)
-
-So, there you have it... enjoy!
+So, get back soon!

@@ -1,19 +1,15 @@
 ---
-title: "Hello Friend"
+title: "Hello World"
 path: "/hello"
-date: "2019-01-17"
-coverImage: "../images/hello.jpg"
-author: "Elliot"
-excerpt: '"Hello, friend?" That''s lame. Maybe I should give you a name...'
-tags: ["rob____ot", "hello friend"]
+date: "2020-07-12"
+coverImage: "../images/mykeyboard.png"
+author: "jcastaneyra"
+excerpt: '"Hello, world" After not blogging for a long time (about 8 years), I am cleaning up what I had in my old blog ...'
+tags: ["blogging again", "hello world"]
 ---
 
-> "Hello, friend?" That's lame. Maybe I should give you a name...\
-> But that's a slippery slope.\
-> You're only in my head.\
-> We have to remember that...\
-> Shit.\
-> It's actually happened.\
-> I'm talking to an imaginary person.
->
-> **— Mr. Robot S01E01**
+"Hello, world" After not blogging for a long time (about 8 years), I am cleaning up what I had in my old blog,
+and I am starting again, but for now this is a work in progress, I want to do this my personal page
+to reference what I like and what I am doing.
+
+In case you wanted to go to my old and ugly blog just [follow the link](http://old.jcastaneyra.com).
