@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 760px;
   max-width: 100%;
 }
@@ -63,4 +63,15 @@
   0% { opacity: 0; }
   50% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+.media {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-right: 10px;
+  width: 760px;
+  max-width: 100%;
 }

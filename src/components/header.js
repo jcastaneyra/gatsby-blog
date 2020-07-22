@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import Menu from './menu'
+import Media from './media'
 
 import style from '../styles/header.module.css'
 
@@ -74,6 +75,9 @@ const Header = props => {
           </span>
         </div>
       </header>
+        <div className={style.media}>
+          <Media />
+        </div>
     </>
   )
 }
