@@ -18,6 +18,7 @@ const Header = props => {
     defaultTheme,
     langs,
     homeLink,
+    langKey,
   } = props
   const defaultThemeState =
     (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
@@ -74,6 +75,7 @@ const Header = props => {
               onChangeTheme={onChangeTheme}
               langs={langs}
               homeLink={homeLink}
+              langKey={langKey}
             />
           </span>
         </div>
@@ -99,6 +101,7 @@ Header.propTypes = {
   menuMoreText: PropTypes.string,
   langs: PropTypes.array,
   homeLink: PropTypes.string,
+  langKey: PropTypes.string,
 }
 
 export default Header

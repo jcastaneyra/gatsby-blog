@@ -6,24 +6,28 @@ import Icon from './icon'
 
 import style from '../styles/menu.module.css'
 
-const MainMenu = ({ mainMenu, mainMenuItems, isMobileMenu, homeLink }) => {
+const MainMenu = ({ mainMenu, mainMenuItems, isMobileMenu, homeLink, langKey }) => {
   const menu = mainMenu.slice(0)
   !isMobileMenu && menu.splice(mainMenuItems)
 
+  const langPath = langKey !== 'en' ? `/${langKey}` : ''
+
   return menu.map((menuItem, index) => (
     <li key={index}>
-      <Link to={homeLink + menuItem.path}>{menuItem.title}</Link>
+      <Link to={langPath + menuItem.path}>{menuItem.title}</Link>
     </li>
   ))
 }
 
-const SubMenu = ({ mainMenu, mainMenuItems, onToggleSubMenu, homeLink }) => {
+const SubMenu = ({ mainMenu, mainMenuItems, onToggleSubMenu, homeLink, langKey }) => {
   const menu = mainMenu.slice(0)
   menu.splice(0, mainMenuItems)
 
+  const langPath = langKey !== 'en' ? `/${langKey}` : ''
+
   const items = menu.map((menuItem, index) => (
     <li key={index}>
-      <Link to={homeLink + menuItem.path}>{menuItem.title}</Link>
+      <Link to={langPath + menuItem.path}>{menuItem.title}</Link>
     </li>
   ))
 
@@ -57,6 +61,7 @@ const Menu = ({
   onChangeTheme,
   langs,
   homeLink,
+  langKey,
 }) => {
   const isSubMenu = !(mainMenuItems >= mainMenu.length) && mainMenuItems > 0
 
@@ -76,7 +81,7 @@ const Menu = ({
             <>
               {/* eslint-enable */}
               <ul className={style.mobileMenu}>
-                <MainMenu mainMenu={mainMenu} homeLink={homeLink} isMobileMenu />
+                <MainMenu mainMenu={mainMenu} homeLink={homeLink} langKey={langKey} isMobileMenu />
               </ul>
               {/* eslint-disable */}
               <div
@@ -98,7 +103,7 @@ const Menu = ({
       </div>
       <div className={style.desktopMenuContainer}>
         <ul className={style.menu}>
-          <MainMenu mainMenu={mainMenu} mainMenuItems={mainMenuItems} homeLink={homeLink} />
+          <MainMenu mainMenu={mainMenu} mainMenuItems={mainMenuItems} homeLink={homeLink} langKey={langKey} />
           {isSubMenu ? (
             <>
               <button
@@ -117,6 +122,7 @@ const Menu = ({
                     mainMenuItems={mainMenuItems}
                     onToggleSubMenu={onToggleSubMenu}
                     homeLink={homeLink} 
+                    langKey={langKey}
                   />
                 </ul>
               ) : null}
@@ -153,6 +159,7 @@ Menu.propTypes = {
   onChangeTheme: PropTypes.func,
   langs: PropTypes.array,
   homeLink: PropTypes.string,
+  langKey: PropTypes.string,
 }
 
 SubMenu.propTypes = {
@@ -165,6 +172,7 @@ SubMenu.propTypes = {
   mainMenuItems: PropTypes.number,
   onToggleSubMenu: PropTypes.func,
   homeLink: PropTypes.string,
+  langKey: PropTypes.string,
 }
 
 export default Menu

@@ -69,6 +69,7 @@ const Layout = ({ children, location }) => {
           menuMoreText={menuMoreText}
           langs={langsMenu}
           homeLink={homeLink}
+          langKey={langKey}
         />
         <div className="content">{children}</div>
         <Footer copyrights={copyrights} />

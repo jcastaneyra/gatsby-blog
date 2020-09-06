@@ -26,7 +26,7 @@ const Post = ({
   const nextPath = nextPost && nextPost.fields.slug
   const nextLabel = nextPost && nextPost.frontmatter.title
 
-  const homeLink = `/${langKey}/`.replace(`/en/`, '/')
+  const langPath = langKey !== 'en' ? `/${langKey}` : ''
 
   return (
     <div className={style.post}>
@@ -39,7 +39,7 @@ const Post = ({
           {tags ? (
             <div className={style.tags}>
               {tags.map(tag => (
-                <Link to={`${homeLink}/tag/${toKebabCase(tag)}/`} key={toKebabCase(tag)}>
+                <Link to={`${langPath}/tag/${toKebabCase(tag)}/`} key={toKebabCase(tag)}>
                   <span className={style.tag}>#{tag}</span>
                 </Link>
               ))}
