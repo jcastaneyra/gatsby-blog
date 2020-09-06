@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
+import { FormattedMessage } from 'react-intl'
 import Navigation from './navigation'
 import { toKebabCase } from '../helpers'
 
@@ -18,11 +19,14 @@ const Post = ({
   html,
   previousPost,
   nextPost,
+  langKey,
 }) => {
-  const previousPath = previousPost && previousPost.frontmatter.path
+  const previousPath = previousPost && previousPost.fields.slug
   const previousLabel = previousPost && previousPost.frontmatter.title
-  const nextPath = nextPost && nextPost.frontmatter.path
+  const nextPath = nextPost && nextPost.fields.slug
   const nextLabel = nextPost && nextPost.frontmatter.title
+
+  const homeLink = `/${langKey}/`.replace(`/en/`, '/')
 
   return (
     <div className={style.post}>
@@ -31,11 +35,11 @@ const Post = ({
           {excerpt ? <Link to={path}>{title}</Link> : title}
         </h1>
         <div className={style.meta}>
-          {date} {author && <>— Written by {author}</>}
+          {date} {author && <>— <FormattedMessage id="writtenBy" /> {author}</>}
           {tags ? (
             <div className={style.tags}>
               {tags.map(tag => (
-                <Link to={`/tag/${toKebabCase(tag)}/`} key={toKebabCase(tag)}>
+                <Link to={`${homeLink}/tag/${toKebabCase(tag)}/`} key={toKebabCase(tag)}>
                   <span className={style.tag}>#{tag}</span>
                 </Link>
               ))}
@@ -54,7 +58,7 @@ const Post = ({
           <>
             <p>{excerpt}</p>
             <Link to={path} className={style.readMore}>
-              Read more →
+              <FormattedMessage id="readMore" /> →
             </Link>
           </>
         ) : (
@@ -84,6 +88,7 @@ Post.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   previousPost: PropTypes.object,
   nextPost: PropTypes.object,
+  langKey: PropTypes.string,
 }
 
 export default Post

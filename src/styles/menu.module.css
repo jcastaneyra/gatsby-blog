@@ -173,3 +173,9 @@
   margin-left: 5px;
   transform: rotate(90deg);
 }
+
+.langMenu {
+  list-style: none;
+  margin-left: 15px;
+  font-size: .8em;
+}

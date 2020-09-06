@@ -4,6 +4,7 @@ const postCSSUrl = require('postcss-url')
 const postCSSImports = require('postcss-import')
 const cssnano = require('cssnano')
 const postCSSMixins = require('postcss-mixins')
+const languages = require('./src/data/languages')
 
 module.exports = {
   siteMetadata: {
@@ -26,6 +27,7 @@ module.exports = {
         path: '/about',
       },
     ],
+    languages,
   },
   plugins: [
     {
@@ -109,6 +111,12 @@ module.exports = {
               noInlineHighlight: false,
             },
           },
+          {
+            resolve: 'gatsby-remark-external-links',
+            options: {
+              target: '_blank',
+            },
+          },
         ],
       },
     },
@@ -122,6 +130,15 @@ module.exports = {
         theme_color: `#292a2d`,
         display: `minimal-ui`,
         icon: `src/images/hello-icon.png`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {
+        langKeyDefault: 'en',
+        useLangKeyLayout: false,
+        pagesPaths: ['/src/posts/', '/src/pages'],
+        prefixDefault: false,
       },
     },
   ],

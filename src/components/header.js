@@ -16,6 +16,8 @@ const Header = props => {
     mainMenuItems,
     menuMoreText,
     defaultTheme,
+    langs,
+    homeLink,
   } = props
   const defaultThemeState =
     (typeof window !== 'undefined' && window.localStorage.getItem('theme')) ||
@@ -34,7 +36,6 @@ const Header = props => {
   }
   const onToggleMobileMenu = () => toggleMobileMenu(!isMobileMenuVisible)
   const onToggleSubMenu = () => toggleSubMenu(!isSubMenuVisible)
-
   return (
     <>
       <Helmet>
@@ -48,7 +49,7 @@ const Header = props => {
       </Helmet>
       <header className={style.header}>
         <div className={style.inner}>
-          <Link to="/">
+          <Link to={homeLink}>
             <div className={style.logo}>
               {siteLogo.src ? (
                 <img src={siteLogo.src} alt={siteLogo.alt} />
@@ -71,13 +72,15 @@ const Header = props => {
               onToggleMobileMenu={onToggleMobileMenu}
               onToggleSubMenu={onToggleSubMenu}
               onChangeTheme={onChangeTheme}
+              langs={langs}
+              homeLink={homeLink}
             />
           </span>
         </div>
       </header>
-        <div className={style.media}>
-          <Media />
-        </div>
+      <div className={style.media}>
+        <Media />
+      </div>
     </>
   )
 }
@@ -94,6 +97,8 @@ Header.propTypes = {
   ),
   mainMenuItems: PropTypes.number,
   menuMoreText: PropTypes.string,
+  langs: PropTypes.array,
+  homeLink: PropTypes.string,
 }
 
 export default Header

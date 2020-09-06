@@ -6,17 +6,18 @@ import SEO from '../components/seo'
 import Layout from '../components/layout'
 import Post from '../components/post'
 
-const BlogPostTemplate = ({ data, pageContext }) => {
+const BlogPostTemplate = props => {
+  const { data, pageContext } = props
   const {
     frontmatter: { title, date, path, author, coverImage, excerpt, tags },
     excerpt: autoExcerpt,
     id,
     html,
   } = data.markdownRemark
-  const { next, previous } = pageContext
+  const { next, previous, langKey } = pageContext
 
   return (
-    <Layout>
+    <Layout {...props}>
       <SEO title={title} description={excerpt || autoExcerpt} />
       <Post
         key={id}
@@ -29,6 +30,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         tags={tags}
         previousPost={previous}
         nextPost={next}
+        langKey={langKey}
       />
     </Layout>
   )
@@ -46,10 +48,12 @@ BlogPostTemplate.propTypes = {
 
 export const pageQuery = graphql`
   query($path: String) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
+    markdownRemark(
+      fields: { slug: { eq: $path }}
+    ) {
       frontmatter {
         title
-        date(formatString: "DD MMMM YYYY")
+        date(formatString: "YYYY/MM/DD")
         path
         author
         excerpt

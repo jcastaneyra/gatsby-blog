@@ -12,4 +12,4 @@ tags: ["blogging again", "hello world"]
 and I am starting again, but for now this is a work in progress, I want to do this my personal page
 to reference what I like and what I am doing.
 
-In case you wanted to go to my old and ugly blog just [follow the link](http://old.jcastaneyra.com).
+In case you wanted to go to my old blog just [follow the link](http://old.jcastaneyra.com).

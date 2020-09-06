@@ -7,8 +7,62 @@ const pageTypeRegex = /src\/(.*?)\//
 const getType = node => node.fileAbsolutePath.match(pageTypeRegex)[1]
 
 const pageTemplate = path.resolve(`./src/templates/page.js`)
-const indexTemplate = path.resolve(`./src/templates/index.js`)
-const tagsTemplate = path.resolve(`./src/templates/tags.js`)
+const indexEnTemplate = path.resolve(`./src/templates/index.en.js`)
+const indexEsTemplate = path.resolve(`./src/templates/index.es.js`)
+const tagsEnTemplate = path.resolve(`./src/templates/tags.en.js`)
+const tagsEsTemplate = path.resolve(`./src/templates/tags.es.js`)
+
+const createPagination = (createPage, posts, template, postsPerPage, prefix) => {
+  paginate({
+    createPage,
+    items: posts,
+    component: template,
+    itemsPerPage: postsPerPage,
+    pathPrefix: prefix,
+  })
+}
+
+const createSortedPages = (createPage, sortedPages) => {
+  forEach(({ node }, index) => {
+    const previous = index === 0 ? null : sortedPages[index - 1].node
+    const next =
+      index === sortedPages.length - 1 ? null : sortedPages[index + 1].node
+    const isNextSameType = getType(node) === (next && getType(next))
+    const isPreviousSameType =
+      getType(node) === (previous && getType(previous))
+
+    createPage({
+      path: node.fields.slug,
+      component: pageTemplate,
+      context: {
+        type: getType(node),
+        next: isNextSameType ? next : null,
+        previous: isPreviousSameType ? previous : null,
+        langKey: node.fields.langKey,
+      },
+    })
+  }, sortedPages)
+}
+
+const createTagPages = (createPage, tags, posts, template, postPerPage, prefix) => {
+  forEach(tag => {
+    const postsWithTag = posts.filter(
+      post =>
+        post.frontmatter.tags && post.frontmatter.tags.indexOf(tag) !== -1,
+    )
+
+    paginate({
+      createPage,
+      items: postsWithTag,
+      component: template,
+      itemsPerPage: postPerPage,
+      pathPrefix: `${prefix}/tag/${toKebabCase(tag)}`,
+      context: {
+        tag,
+      },
+    })
+  }, tags) 
+}
 
 exports.createPages = ({ actions, graphql, getNodes }) => {
   const { createPage } = actions
@@ -28,6 +82,10 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
               tags
             }
             fileAbsolutePath
+            fields {
+              langKey
+              slug
+            }
           }
         }
       }
@@ -54,49 +112,63 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
       return (typeA > typeB) - (typeA < typeB)
     })
 
-    const posts = allNodes.filter(
-      ({ internal, fileAbsolutePath }) =>
+    const enPosts = allNodes.filter(
+      ({ internal, fileAbsolutePath, fields}) =>
         internal.type === 'MarkdownRemark' &&
-        fileAbsolutePath.indexOf('/posts/') !== -1,
+        fileAbsolutePath.indexOf('/posts/') !== -1 &&
+        fields.langKey === 'en'
     )
 
     // Create posts index with pagination
-    paginate({
-      createPage,
-      items: posts,
-      component: indexTemplate,
-      itemsPerPage: siteMetadata.postsPerPage,
-      pathPrefix: '/',
-    })
+    createPagination(createPage, enPosts, indexEnTemplate, siteMetadata.postsPerPage, '/')
+
+    const esPosts = allNodes.filter(
+      ({ internal, fileAbsolutePath, fields }) =>
+        internal.type === 'MarkdownRemark' &&
+        fileAbsolutePath.indexOf('/posts/') !== -1 &&
+        fields.langKey === 'es'
+    )
+
+    createPagination(createPage, esPosts, indexEsTemplate, siteMetadata.postsPerPage, '/es')
+
+    const enSortedPages = sortedPages.filter(
+      ({node}) =>
+        node.fields.langKey === 'en'
+    )
 
     // Create each markdown page and post
-    forEach(({ node }, index) => {
-      const previous = index === 0 ? null : sortedPages[index - 1].node
-      const next =
-        index === sortedPages.length - 1 ? null : sortedPages[index + 1].node
-      const isNextSameType = getType(node) === (next && getType(next))
-      const isPreviousSameType =
-        getType(node) === (previous && getType(previous))
+    createSortedPages(createPage, enSortedPages)
 
-      createPage({
-        path: node.frontmatter.path,
-        component: pageTemplate,
-        context: {
-          type: getType(node),
-          next: isNextSameType ? next : null,
-          previous: isPreviousSameType ? previous : null,
-        },
-      })
-    }, sortedPages)
+    const esSortedPages = sortedPages.filter(
+      ({node}) =>
+        node.fields.langKey === 'es'
+    )
+
+    // Create each markdown page and post
+    createSortedPages(createPage, esSortedPages)
 
     // Create tag pages
     const tags = filter(
       tag => not(isNil(tag)),
-      uniq(flatMap(post => post.frontmatter.tags, posts)),
+      uniq(flatMap(post => post.frontmatter.tags, enPosts)),
     )
 
+    const enTags = filter(
+      tag => not(isNil(tag)),
+      uniq(flatMap(post => post.frontmatter.tags, enPosts)),
+    )
+
+    //createTagPages(createPage, enTags, enPosts, tagsEnTemplate, siteMetadata.postPerPage, '')
+
+    const esTags = filter(
+      tag => not(isNil(tag)),
+      uniq(flatMap(post => post.frontmatter.tags, esPosts)),
+    )
+
+    //createTagPages(createPage, esTags, esPosts, tagsEsTemplate, siteMetadata.postPerPage, '/es')
+
     forEach(tag => {
-      const postsWithTag = posts.filter(
+      const postsWithTag = enPosts.filter(
         post =>
           post.frontmatter.tags && post.frontmatter.tags.indexOf(tag) !== -1,
       )
@@ -104,14 +176,32 @@ exports.createPages = ({ actions, graphql, getNodes }) => {
       paginate({
         createPage,
         items: postsWithTag,
-        component: tagsTemplate,
+        component: tagsEnTemplate,
         itemsPerPage: siteMetadata.postsPerPage,
         pathPrefix: `/tag/${toKebabCase(tag)}`,
         context: {
           tag,
         },
       })
-    }, tags)
+    }, enTags)
+
+    forEach(tag => {
+      const postsWithTag = esPosts.filter(
+        post =>
+          post.frontmatter.tags && post.frontmatter.tags.indexOf(tag) !== -1,
+      )
+
+      paginate({
+        createPage,
+        items: postsWithTag,
+        component: tagsEsTemplate,
+        itemsPerPage: siteMetadata.postsPerPage,
+        pathPrefix: `/es/tag/${toKebabCase(tag)}`,
+        context: {
+          tag,
+        },
+      })
+    }, esTags)
 
     return {
       sortedPages,
@@ -139,3 +229,4 @@ exports.sourceNodes = ({ actions }) => {
   `
   createTypes(typeDefs)
 }
+

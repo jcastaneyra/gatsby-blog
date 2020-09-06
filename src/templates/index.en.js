@@ -6,12 +6,10 @@ import Layout from '../components/layout'
 import Post from '../components/post'
 import Navigation from '../components/navigation'
 
-import '../styles/layout.css'
 
-const Tags = ({
-  data,
-  pageContext: { nextPagePath, previousPagePath, tag },
-}) => {
+const Index = props => {
+  const { data, pageContext: { nextPagePath, previousPagePath } } = props
+
   const {
     allMarkdownRemark: { edges: posts },
   } = data
@@ -19,11 +17,7 @@ const Tags = ({
   return (
     <>
       <SEO />
-      <Layout>
-        <div className="infoBanner">
-          Posts with tag: <span>#{tag}</span>
-        </div>
-
+      <Layout {...props}>
         {posts.map(({ node }) => {
           const {
             id,
@@ -31,11 +25,14 @@ const Tags = ({
             frontmatter: {
               title,
               date,
-              path,
               author,
               coverImage,
               excerpt,
               tags,
+            },
+            fields: {
+              langKey,
+              slug,
             },
           } = node
 
@@ -44,11 +41,12 @@ const Tags = ({
               key={id}
               title={title}
               date={date}
-              path={path}
+              path={slug}
               author={author}
-              tags={tags}
               coverImage={coverImage}
+              tags={tags}
               excerpt={excerpt || autoExcerpt}
+              langKey={langKey}
             />
           )
         })}
@@ -64,7 +62,7 @@ const Tags = ({
   )
 }
 
-Tags.propTypes = {
+Index.propTypes = {
   data: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
     nextPagePath: PropTypes.string,
@@ -73,9 +71,12 @@ Tags.propTypes = {
 }
 
 export const postsQuery = graphql`
-  query($limit: Int!, $skip: Int!, $tag: String!) {
+  query($limit: Int!, $skip: Int!) {
     allMarkdownRemark(
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { 
+        fileAbsolutePath: { regex: "//posts//" } 
+        fields: { langKey: { eq: "en" } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
@@ -86,7 +87,7 @@ export const postsQuery = graphql`
           excerpt
           frontmatter {
             title
-            date(formatString: "DD MMMM YYYY")
+            date(formatString: "YYYY/MM/DD")
             path
             author
             excerpt
@@ -99,10 +100,14 @@ export const postsQuery = graphql`
               }
             }
           }
+          fields {
+            langKey
+            slug
+          }
         }
       }
     }
   }
 `
 
-export default Tags
+export default Index
