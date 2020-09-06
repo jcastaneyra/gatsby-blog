@@ -21,4 +21,4 @@ Do you want to send a message? Reach me out on [twitter](https://twitter.com/jca
 
 HEY!! in case you are looking my old blog, you can find it here => [http://old.jcastaneyra.com](http://old.jcastaneyra.com).
 
-![AWS Certs](../images/certs.png)
+![AWS Certs](../images/certs.jpg)

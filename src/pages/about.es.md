@@ -21,4 +21,4 @@ En este blog, quiero compartir algo de contenido técnico acerca de lo que me ap
 
 Hey!! En caso de que estés buscando mi blog anterior, lo puedes encontrar aquí => [http://old.jcastaneyra.com](http://old.jcastaneyra.com).
 
-![AWS Certs](../images/certs.png)
+![AWS Certs](../images/certs.jpg)
