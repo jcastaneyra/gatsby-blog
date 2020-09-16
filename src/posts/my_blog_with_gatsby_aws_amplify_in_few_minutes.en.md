@@ -150,4 +150,4 @@ I know there are other services to deploy, such as Netlify and Vercel; I think I
 
 For now, AWS Amplify console works for me; maybe because I feel comfortable with AWS and have been working with it for several years, it is fast to bring my web sites online, including the domain and the SSL certificate.
 
-Do you have comments? Go to [dev.to](https://dev.to/jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-21dg)
+Do you have comments? Go to [dev.to](https://dev.to/jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-21dg) or in [medium](https://medium.com/@jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-40aed7753bd6?sk=7540e6b49f256ba731eed8470d3d62ce)

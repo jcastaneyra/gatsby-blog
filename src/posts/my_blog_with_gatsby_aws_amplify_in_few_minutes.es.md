@@ -138,4 +138,4 @@ Se que hay otros servicios para poder desplegar y manegar sitios estáticos, alg
 
 Aunque, por ahora AWS Amplify console funciona para mi, tal vez porque me siento cómodo con AWS y porque he trabajado con los servicios de AWS por mucho tiempo, además es rápido esta forma de subir sitios web, inclyendo el dominio y el certificado SSL.
 
-¿Tienes comentarios? Ve a [dev.to](https://dev.to/jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-21dg)
+¿Tienes comentarios? Ve a [dev.to](https://dev.to/jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-21dg) o en [medium](https://medium.com/@jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-40aed7753bd6?sk=7540e6b49f256ba731eed8470d3d62ce)
