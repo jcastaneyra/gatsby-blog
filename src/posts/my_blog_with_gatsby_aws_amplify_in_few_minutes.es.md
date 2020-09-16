@@ -112,7 +112,7 @@ En Amplify console se mostrará el status del deployment, se podrá ver algo com
 
 Ir a la [consola de Route53](https://console.aws.amazon.com/route53/), y hacer click debajo de Domains en "Registered domains", presionar en el botón de "Register Domain", podrás buscar y dominio que quieras comprar, la consola te guiaría y pediría la información necesaria para poder comprar el dominio.
 
-![Amplify deployment status](../images/blog_gatsby_route53_buy_domain.png)
+![Route53 domain](../images/blog_gatsby_route53_buy_domain.png)
 
 ## Asignar el dominio a la App
 
@@ -122,11 +122,11 @@ Una vez que la app se desplegó con la consola de Amplify, verás una sección d
 
 Después de dar click, verás algo como lo siguiente.
 
-![Amplify extra steps](../images/blog_gatsby_add_domain.png)
+![Amplify add domain](../images/blog_gatsby_add_domain.png)
 
 Presiona "Add domain", escoge el dominio y configura que subdominios se requieren, presionar "Save".
 
-![Amplify extra steps](../images/blog_gatsby_configure_domain.png)
+![Amplify configure domain](../images/blog_gatsby_configure_domain.png)
 
 Amplify console asignará y generará los certificados a través de AWS Certificate Manager.
 
@@ -137,3 +137,5 @@ Después de un rato se tendrá el sitio del blog con el dominio, y AWS Amplify c
 Se que hay otros servicios para poder desplegar y manegar sitios estáticos, algunos como Netlify y Vercel, los cuales estoy seguro deberé probar en el futuro.
 
 Aunque, por ahora AWS Amplify console funciona para mi, tal vez porque me siento cómodo con AWS y porque he trabajado con los servicios de AWS por mucho tiempo, además es rápido esta forma de subir sitios web, inclyendo el dominio y el certificado SSL.
+
+¿Tienes comentarios? Ve a [dev.to](https://dev.to/jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-21dg)

@@ -1,5 +1,5 @@
 ---
-title: "Your blog with Gatsby, AWS Amplify and my own domain in Route53 in a few minutes."
+title: "Your blog with Gatsby, AWS Amplify and domain in Route53 in a few minutes."
 path: "/my_blog_with_gatsby_aws_amplify_in_few_minutes"
 date: "2020-09-16"
 coverImage: "../images/amplify_gatsby.png"
@@ -69,7 +69,7 @@ I like the starters because you can review which start you want the most and ada
 At this stage, I got Visual Studio Code and started to review the code and make some modifications.
 
 
-1. I did modify `src/posts/hello.md` and create my first post, it straightforward.
+1. I did modify `src/posts/hello.md` and create my first post, it is straightforward.
 2. I updated `src/pages/about.md` and removed `src/pages/showcase.md` and `src/posts/example.md`, also I added some new images to `src/images` to be used in the modified page and post.
 3. I modified siteMetadata at `gatsby-config.js` file.
 
@@ -115,7 +115,7 @@ Review Repository details and App settings and press "Save and deploy".
 
 ![Amplify review and deploy](../images/blog_gatsby_amplify_review.png)
 
-Amplify console will show the status of deployment, you will see something like this.
+Amplify console will show the status of the deployment, you will see something like this.
 
 ![Amplify deployment status](../images/blog_gatsby_amplify_deployment.png)
 
@@ -124,9 +124,9 @@ Amplify console will show the status of deployment, you will see something like 
 
 Go to [Route53 console](https://console.aws.amazon.com/route53/), and click below Domains on "Registered domains" press in the "Register Domain" button, you would search a domain you would like to buy, the console would guide you to fill all required info and buy the domain.
 
-![Amplify deployment status](../images/blog_gatsby_route53_buy_domain.png)
+![Route53 domain](../images/blog_gatsby_route53_buy_domain.png)
 
-## Assign domain to app
+## Assign a domain to the app
 
 Once the app is deployed with Amplify console, you will see some extra steps. One of these steps is "Add a custom domain with a free SSL certificate", click on this step.
 
@@ -134,11 +134,11 @@ Once the app is deployed with Amplify console, you will see some extra steps. On
 
 After clicking, you will see something like this.
 
-![Amplify extra steps](../images/blog_gatsby_add_domain.png)
+![Amplify add domain](../images/blog_gatsby_add_domain.png)
 
 Press "Add domain", choose your domain and configure, press "Save".
 
-![Amplify extra steps](../images/blog_gatsby_configure_domain.png)
+![Amplify configure domain](../images/blog_gatsby_configure_domain.png)
 
 Amplify console would assign and generate certificates through AWS Certificate Manager.
 
@@ -149,3 +149,5 @@ After a while, you would have a blog site with your domain, and AWS Amplify cons
 I know there are other services to deploy, such as Netlify and Vercel; I think I must test them in the future.
 
 For now, AWS Amplify console works for me; maybe because I feel comfortable with AWS and have been working with it for several years, it is fast to bring my web sites online, including the domain and the SSL certificate.
+
+Do you have comments? Go to [dev.to](https://dev.to/jcastaneyra/your-blog-with-gatsby-aws-amplify-and-a-domain-in-route53-in-a-few-minutes-21dg)
